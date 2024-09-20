@@ -1,6 +1,5 @@
 import os
 
-from absl import app
 import json5
 
 from model_alignment import model_helper
@@ -104,4 +103,4 @@ def main(*_) -> None:
 
 
 if __name__ == "__main__":
-  app.run(main)
+  main()

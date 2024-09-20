@@ -1,4 +1,4 @@
-absl-py==2.1.0
+click==8.1.7
 json5==0.9.25
 keras==3.5.0
 keras-nlp==0.15.0
