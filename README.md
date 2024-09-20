@@ -4,7 +4,26 @@ Proof of concept library of Responsible Generative AI Tools.
 
 ## Installation
 
-Temporarily, you can install this library locally in its own virtual
+You can install `rgai_tools` directly using `pipx`:
+
+```bash
+pipx install 'git+https://github.com/owahltinez/rgai-tools.git'
+```
+
+If you are using an M1/M2/M3 Mac device, you will need to provide a URL for
+prebuilt binaries of `tensorflow-text` and additionally install
+`tensorflow-metal` to enable hardware acceleration:
+
+```bash
+TF_TEXT='https://github.com/sun1638650145/Libraries-and-Extensions-for-TensorFlow-for-Apple-Silicon/releases/download/v2.17/tensorflow-2.17.0-cp311-cp311-macosx_14_0_arm64.whl'
+pipx install 'git+https://github.com/owahltinez/rgai-tools.git' \
+    --preinstall setuptools \
+    --preinstall "$TF_TEXT" \
+    --preinstall tensorflow-metal \
+    --python $(which python3.11)
+```
+
+For development, you can install this library locally in its own virtual
 environment after cloning the repository:
 
 ```bash
@@ -29,7 +48,7 @@ tee dataset.jsonl <<EOF > /dev/null
 {'text': 'it goes on water', 'label': 'boat'}
 EOF
 # Pipe the dataset to the agile classifier for training.
-cat dataset.jsonl | python -m rgai_tools.agile_classifier \
+cat dataset.jsonl | agile_classifier \
     --model_preset='gemma2_instruct_2b_en' \
     --model_output=/path/to/output.lora.h5
 ```
@@ -51,7 +70,7 @@ To determine whether some text is in violation of one of the policy types
 supported by ShieldGemma, you can do the following:
 
 ```bash
-python -m rgai_tools.shield_gemma \
+shieldgemma \
     --harm_type=HATE \
     --use_case=PROMPT_ONLY \
     --user_content='text to evaluate'
@@ -67,7 +86,7 @@ improve prompts based on user or auto-generated feedback. To start the process,
 run:
 
 ```bash
-python -m rgai_tools.model_aligner
+model_aligner
 ```
 
 NOTE: You will need to set a `GEMINI_API` environment variable with your API
