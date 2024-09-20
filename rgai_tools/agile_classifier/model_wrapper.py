@@ -61,8 +61,9 @@ class AgileClassifier:
     inputs = self.model.preprocessor.generate_preprocess(prompts)
     return self.probability_model.predict(inputs, verbose=0)
 
-  def predict(self, x_eval: str) -> int:
-    return numpy.argmax(self.predict_score(self.model, x_eval))
+  def predict(self, x_text: Iterable[str]) -> list[str]:
+    idx = numpy.argmax(self.predict_score(x_text), axis=1)
+    return [self.labels[i] for i in idx]
 
 
 def train_agile_classifier(

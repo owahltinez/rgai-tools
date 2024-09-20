@@ -57,9 +57,17 @@ The fine-tuned model will be available at the specified location and can be
 loaded using:
 
 ```python
+from rgai_tools.agile_classifier import model_wrapper
 from rgai_tools.common import model_loader
+
+# Load model from LoRA checkpoint.
+labels = ["car", "bike", "boat"]
 model = model_loader.load_gemma_model("gemma2_instruct_2b_en")
 model.backbone.load_lora_weights("/path/to/output.lora.h5")
+classifier = model_wrapper.AgileClassifier(model=model, labels=labels)
+
+# Perform inference using model wrapper.
+pred = classifier.predict(["it has two wheels"])
 ```
 
 NOTE: Your kaggle credentials need to be [properly set][kaggle-setup] first.
