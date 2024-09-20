@@ -13,7 +13,7 @@ setuptools.setup(
         "console_scripts": [
             "agile_classifier = rgai_tools.agile_classifier.__main__:main",
             "model_aligner = rgai_tools.model_aligner.__main__:main",
-            "shieldgemma = rgai_tools.shield_gemma.__main__:main",
+            "shieldgemma = rgai_tools.shieldgemma.__main__:main",
         ],
     },
 )

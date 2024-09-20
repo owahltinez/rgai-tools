@@ -2,8 +2,8 @@ import sys
 import json5
 import click
 
-from ..common import model_loader
-from . import model_wrapper
+from rgai_tools.common import model_loader
+from rgai_tools.agile_classifier import model_wrapper
 
 _DEFAULT_MODEL_PRESET = "gemma_instruct_2b_en"
 

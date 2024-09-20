@@ -2,9 +2,9 @@ import sys
 import json5
 import click
 
-from ..common import model_loader
-from . import model_wrapper
-from . import text_processing
+from rgai_tools.common import model_loader
+from rgai_tools.shieldgemma import model_wrapper
+from rgai_tools.shieldgemma import text_processing
 
 _DEFAULT_MODEL_PRESET = "shieldgemma_2b_en"
 
