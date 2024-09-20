@@ -9,4 +9,11 @@ setup(
     version="0.1.0",
     packages=["rgai_tools"],
     install_requires=requirements,
+    entry_points={
+        "console_scripts": [
+            "agile_classifier = rgai_tools.agile_classifier.__main__:main",
+            "model_aligner = rgai_tools.model_aligner.__main__:main",
+            "shieldgemma = rgai_tools.shield_gemma.__main__:main",
+        ],
+    },
 )

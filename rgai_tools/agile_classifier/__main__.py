@@ -35,7 +35,7 @@ _MAX_SEQ_LEN = flags.DEFINE_integer(
 )
 
 
-def main(_) -> None:
+def main(*_) -> None:
   # The model output path should end with ".lora.h5".
   model_output_path = _MODEL_OUTPUT.value
   if not model_output_path.endswith(".lora.h5"):

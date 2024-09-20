@@ -1,5 +1,6 @@
 import os
 
+from absl import app
 import json5
 
 from model_alignment import model_helper
@@ -33,7 +34,7 @@ def print_model_response(
   print("\n\n")
 
 
-if __name__ == "__main__":
+def main(*_) -> None:
   gemini_key = os.getenv("GEMINI_KEY")
   if not gemini_key:
     raise ValueError("GEMINI_KEY environment variable must be set")
@@ -100,3 +101,7 @@ if __name__ == "__main__":
   print("\nAlignment complete.")
   print("Final model description and principles:\n")
   print_indented(aligner.get_model_description_with_principles() + "\n", indent=1)
+
+
+if __name__ == "__main__":
+  app.run(main)

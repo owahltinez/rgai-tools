@@ -19,7 +19,7 @@ _MODEL_PRESET = flags.DEFINE_string(
 )
 
 
-def main(_) -> None:
+def main(*_) -> None:
   # Load model and wrapper.
   base_model = model_loader.load_gemma_model(_MODEL_PRESET.value)
   shieldgemma = model_wrapper.ShieldGemma(base_model)
