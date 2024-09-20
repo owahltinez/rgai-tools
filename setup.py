@@ -1,13 +1,13 @@
-from setuptools import setup
+import setuptools
 
 # Read the requirements from requirements.txt
 with open("requirements.txt") as f:
   requirements = f.read().splitlines()
 
-setup(
+setuptools.setup(
     name="rgai_tools",
     version="0.1.0",
-    packages=["rgai_tools"],
+    packages=setuptools.find_packages(),
     install_requires=requirements,
     entry_points={
         "console_scripts": [
