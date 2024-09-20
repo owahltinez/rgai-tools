@@ -67,6 +67,7 @@ class AgileClassifier:
 
 
 def train_agile_classifier(
+    labels: tuple[str, ...],
     model: keras_nlp.models.CausalLM,
     x_train: list[str],
     y_train: list[str],
@@ -74,9 +75,6 @@ def train_agile_classifier(
     batch_size: int = 1,
     lora_rank: int = 4,
 ) -> AgileClassifier:
-  # Extract labels from the training data.
-  labels = tuple(set(y_train))
-
   # Create an instance of the AgileClassifier.
   agile_classifier = AgileClassifier(model=model, labels=labels)
 

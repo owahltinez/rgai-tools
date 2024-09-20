@@ -7,36 +7,42 @@ from rgai_tools.agile_classifier import model_wrapper
 
 _DEFAULT_MODEL_PRESET = "gemma_instruct_2b_en"
 
+
 @click.command()
 @click.option(
-  '--model-output',
-  required=True,
-  help="Path to save the model. Should end with '.lora.h5'."
+    "--labels",
+    required=True,
+    help="Comma-separated list of labels for the classifier.",
 )
 @click.option(
-  '--model-preset',
-  default=_DEFAULT_MODEL_PRESET,
-  help="Preset (name) of the model, or path to local keras model."
+    "--model-output",
+    required=True,
+    help="Path to save the model. Should end with '.lora.h5'.",
 )
 @click.option(
-  '--epochs',
-  default=1,
-  help="Number of epochs to train the classifier."
+    "--model-preset",
+    default=_DEFAULT_MODEL_PRESET,
+    help="Preset (name) of the model, or path to local keras model.",
 )
 @click.option(
-  '--max-sequence-length',
-  default=128,
-  help="Maximum sequence length for the model's preprocessor."
+    "--epochs",
+    default=1,
+    help="Number of epochs to train the classifier.",
 )
-def main(model_output, model_preset, epochs, max_sequence_length):
+@click.option(
+    "--max-sequence-length",
+    default=128,
+    help="Maximum sequence length for the model's preprocessor.",
+)
+def main(labels, model_output, model_preset, epochs, max_sequence_length):
   # The model output path should end with ".lora.h5".
   if not model_output.endswith(".lora.h5"):
     raise ValueError("The model output path should end with '.lora.h5'.")
 
   # Load the LLM model.
   llm = model_loader.load_gemma_model(
-    preset=model_preset,
-    max_sequence_length=max_sequence_length,
+      preset=model_preset,
+      max_sequence_length=max_sequence_length,
   )
 
   # Read the data from stdin.
@@ -55,10 +61,11 @@ def main(model_output, model_preset, epochs, max_sequence_length):
 
   # Train the classifier.
   classifier = model_wrapper.train_agile_classifier(
-    model=llm,
-    x_train=[x["text"] for x in records],
-    y_train=[x["label"] for x in records],
-    epochs=epochs,
+      labels=labels.split(","),
+      model=llm,
+      x_train=[x["text"] for x in records],
+      y_train=[x["label"] for x in records],
+      epochs=epochs,
   )
 
   # Save the model (only the LoRA weights).
@@ -66,10 +73,11 @@ def main(model_output, model_preset, epochs, max_sequence_length):
 
   # Log information about how we can re-load the model.
   click.echo(
-    f"The model can be re-loaded using the following code:\n"
-    f"model = model_loader.load_gemma_model(preset='{model_preset}')\n"
-    f"model.backbone.load_lora_weights('{model_output}')"
+      f"The model can be re-loaded using the following code:\n"
+      f"model = model_loader.load_gemma_model(preset='{model_preset}')\n"
+      f"model.backbone.load_lora_weights('{model_output}')"
   )
+
 
 if __name__ == "__main__":
   main()

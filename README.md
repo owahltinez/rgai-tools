@@ -49,6 +49,7 @@ tee dataset.jsonl <<EOF > /dev/null
 EOF
 # Pipe the dataset to the agile classifier for training.
 cat dataset.jsonl | agile_classifier \
+    --labels='car,bike,boat' \
     --model-preset='gemma2_instruct_2b_en' \
     --model-output=/path/to/output.lora.h5
 ```
