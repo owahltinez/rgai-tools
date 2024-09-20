@@ -70,10 +70,7 @@ To determine whether some text is in violation of one of the policy types
 supported by ShieldGemma, you can do the following:
 
 ```bash
-shieldgemma \
-    --harm_type=HATE \
-    --use_case=PROMPT_ONLY \
-    --user_content='text to evaluate'
+echo "{'harm_type': 'HATE', 'user_content': 'have a nice day'}" | shieldgemma
 ```
 
 NOTE: Your kaggle credentials need to be [properly set][kaggle-setup] first.
