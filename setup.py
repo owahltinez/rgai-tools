@@ -11,9 +11,7 @@ setuptools.setup(
     install_requires=requirements,
     entry_points={
         "console_scripts": [
-            "agile_classifier = rgai_tools.agile_classifier.__main__:main",
-            "model_aligner = rgai_tools.model_aligner.__main__:main",
-            "shieldgemma = rgai_tools.shieldgemma.__main__:main",
+            "rgai-tools = rgai_tools.__main__:cli",
         ],
     },
 )

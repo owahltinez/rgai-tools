@@ -8,33 +8,50 @@ from rgai_tools.agile_classifier import model_wrapper
 _DEFAULT_MODEL_PRESET = "gemma_instruct_2b_en"
 
 
-@click.command()
+@click.group()
+def agile_classifier():
+  pass
+
+
+@agile_classifier.command()
 @click.option(
     "--labels",
+    type=click.STRING,
     required=True,
     help="Comma-separated list of labels for the classifier.",
 )
 @click.option(
     "--model-output",
+    type=click.Path(exists=False),
     required=True,
     help="Path to save the model. Should end with '.lora.h5'.",
 )
 @click.option(
     "--model-preset",
+    type=click.STRING,
     default=_DEFAULT_MODEL_PRESET,
     help="Preset (name) of the model, or path to local keras model.",
 )
 @click.option(
     "--epochs",
+    type=click.INT,
     default=1,
     help="Number of epochs to train the classifier.",
 )
 @click.option(
     "--max-sequence-length",
+    type=click.INT,
     default=128,
     help="Maximum sequence length for the model's preprocessor.",
 )
-def main(labels, model_output, model_preset, epochs, max_sequence_length):
+def train(
+    *,
+    labels: str,
+    model_output: str,
+    model_preset: str,
+    epochs: int,
+    max_sequence_length: int,
+):
   # The model output path should end with ".lora.h5".
   if not model_output.endswith(".lora.h5"):
     raise ValueError("The model output path should end with '.lora.h5'.")
@@ -80,4 +97,4 @@ def main(labels, model_output, model_preset, epochs, max_sequence_length):
 
 
 if __name__ == "__main__":
-  main()
+  agile_classifier()

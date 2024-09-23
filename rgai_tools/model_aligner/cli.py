@@ -1,9 +1,15 @@
 import os
 
+import click
 import json5
 
 from model_alignment import model_helper
 from model_alignment import single_run
+
+
+@click.group()
+def model_aligner():
+  pass
 
 
 def print_indented(text: str, indent: int = 1) -> None:
@@ -33,8 +39,14 @@ def print_model_response(
   print("\n\n")
 
 
-def main(*_) -> None:
-  gemini_key = os.getenv("GEMINI_KEY")
+@model_aligner.command()
+@click.option(
+    "--gemini-key",
+    type=click.STRING,
+    default=os.getenv("GEMINI_KEY"),
+    help="Comma-separated list of labels for the classifier.",
+)
+def align_prompt(*, gemini_key: str) -> None:
   if not gemini_key:
     raise ValueError("GEMINI_KEY environment variable must be set")
 
@@ -103,4 +115,4 @@ def main(*_) -> None:
 
 
 if __name__ == "__main__":
-  main()
+  model_aligner()

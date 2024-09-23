@@ -23,6 +23,9 @@ pipx install 'git+https://github.com/owahltinez/rgai-tools.git' \
     --python $(which python3.11)
 ```
 
+After installing, there will be a command `rgai-tools` available in your shell
+which will be the main entrypoint for the various components.
+
 For development, you can install this library locally in its own virtual
 environment after cloning the repository:
 
@@ -34,6 +37,9 @@ python -m pip install -e .
 ```
 
 ## Usage: Agile Classifier
+
+Agile classifiers and related subcomponents are available under the
+`rgai-tools agile-classifier` subcommand.
 
 To train your own agile classifier, you'll need a dataset with records
 containing `text` and `label` keys. The set of all possible classes will be
@@ -48,7 +54,7 @@ tee dataset.jsonl <<EOF > /dev/null
 {'text': 'it goes on water', 'label': 'boat'}
 EOF
 # Pipe the dataset to the agile classifier for training.
-cat dataset.jsonl | agile_classifier \
+cat dataset.jsonl | rgai-tools agile-classifier train \
     --labels='car,bike,boat' \
     --model-preset='gemma2_instruct_2b_en' \
     --model-output=/path/to/output.lora.h5
@@ -75,16 +81,22 @@ NOTE: Your kaggle credentials need to be [properly set][kaggle-setup] first.
 
 ## Usage: ShieldGemma
 
+ShieldGemma and related subcomponents are available under the
+`rgai-tools shieldgemma` subcommand.
+
 To determine whether some text is in violation of one of the policy types
 supported by ShieldGemma, you can do the following:
 
 ```bash
-echo "{'harm_type': 'HATE', 'user_content': 'have a nice day'}" | shieldgemma
+echo "{'harm_type': 'HATE', 'user_content': 'have a nice day'}" | rgai-tools shieldgemma
 ```
 
 NOTE: Your kaggle credentials need to be [properly set][kaggle-setup] first.
 
 ## Usage: Model Aligner
+
+Model Aligner and related subcomponents are available under the
+`rgai-tools model-aligner` subcommand.
 
 Model alignment is done via the [model-alignment][model-alignment] package.
 It runs as an interactive terminal application that lets you iteratively
@@ -92,7 +104,7 @@ improve prompts based on user or auto-generated feedback. To start the process,
 run:
 
 ```bash
-model_aligner
+rgai-tools model-aligner
 ```
 
 NOTE: You will need to set a `GEMINI_API` environment variable with your API

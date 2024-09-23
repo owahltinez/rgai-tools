@@ -9,13 +9,18 @@ from rgai_tools.shieldgemma import text_processing
 _DEFAULT_MODEL_PRESET = "shieldgemma_2b_en"
 
 
-@click.command()
+@click.group()
+def shieldgemma():
+  pass
+
+
+@shieldgemma.command()
 @click.option(
     "--model_preset",
     default=_DEFAULT_MODEL_PRESET,
     help="Preset (name) of the model, or path to local keras model.",
 )
-def main(model_preset):
+def evaluate(*, model_preset: str):
   # Load model and wrapper.
   base_model = model_loader.load_gemma_model(model_preset)
   shieldgemma = model_wrapper.ShieldGemma(base_model)
@@ -47,4 +52,4 @@ def main(model_preset):
 
 
 if __name__ == "__main__":
-  main()
+  shieldgemma()
