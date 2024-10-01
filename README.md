@@ -110,5 +110,39 @@ rgai-tools model-aligner
 NOTE: You will need to set a `GEMINI_API` environment variable with your API
 key.
 
+## Usage LLM Comparator
+
+LLM Comparator is available under the `rgai-tools llm-comparator` subcommand.
+This is a wrapper for the [llm-comparator][llm-comparator] package
+
+LLM Comparator is a UI tool that allows you to compare two models side by side.
+You can also use an LLM to help you score the differences between the model
+responses.
+
+If you already have a config file, you can launch it via:
+
+```bash
+rgai-tools llm-comparator launch --port 8080 --config-file "https://.../...json"
+```
+
+If you don't have the model outputs but have access to the models, you could
+instead run:
+
+```bash
+# Write dataset content to `dataset.jsonl`.
+tee dataset.jsonl <<EOF > /dev/null
+{'input': 'it has four wheels'}
+{'input': 'it is human powered'}
+{'input': 'it goes on water'}
+EOF
+# Pipe the dataset to the model comparator and start the UI.
+cat dataset.jsonl | rgai-tools llm-comparator compare \
+    --model-a='gemma_1.1_instruct_2b_en' \
+    --model-b='gemma2_instruct_2b_en' \
+    --model-judge='gemini-pro' \
+    --serve
+```
+
 [kaggle-setup]: https://github.com/Kaggle/kaggle-api/blob/main/docs/README.md#api-credentials
 [model-alignment]: https://github.com/PAIR-code/model-alignment
+[llm-comparator]: https://github.com/PAIR-code/llm-comparator

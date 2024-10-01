@@ -1,8 +1,10 @@
 absl-py==2.1.0
+bottle==0.13.1
 click==8.1.7
 json5==0.9.25
 keras==3.5.0
 keras-nlp==0.15.0
+llm-comparator==0.1
 model-alignment==0.1
 pandas==2.2.2
 tensorflow==2.17.0

@@ -16,7 +16,7 @@ def shieldgemma():
 
 @shieldgemma.command()
 @click.option(
-    "--model_preset",
+    "--model-preset",
     default=_DEFAULT_MODEL_PRESET,
     help="Preset (name) of the model, or path to local keras model.",
 )
@@ -30,7 +30,7 @@ def evaluate(*, model_preset: str):
   click.echo(
       "Expected format: {'harm_type': 'HATE', 'user_content': 'content'}\n"
       "Reading user content from stdin. You can pipe input from another "
-      "command or type it in the terminal followed by [CTRL] + D."
+      "command or type it in the terminal followed by [CTRL + D]."
   )
   prompts = []
   for line in sys.stdin.readlines():
