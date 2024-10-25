@@ -15,7 +15,7 @@ prebuilt binaries of `tensorflow-text` and additionally install
 `tensorflow-metal` to enable hardware acceleration:
 
 ```bash
-TF_TEXT='https://github.com/sun1638650145/Libraries-and-Extensions-for-TensorFlow-for-Apple-Silicon/releases/download/v2.17/tensorflow-2.17.0-cp311-cp311-macosx_14_0_arm64.whl'
+TF_TEXT='https://github.com/sun1638650145/Libraries-and-Extensions-for-TensorFlow-for-Apple-Silicon/releases/download/v2.17/tensorflow_text-2.17.0-cp311-cp311-macosx_11_0_arm64.whl'
 pipx install 'git+https://github.com/owahltinez/rgai-tools.git' \
     --preinstall setuptools \
     --preinstall "$TF_TEXT" \
