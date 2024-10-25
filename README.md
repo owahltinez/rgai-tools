@@ -88,7 +88,7 @@ To determine whether some text is in violation of one of the policy types
 supported by ShieldGemma, you can do the following:
 
 ```bash
-echo "{'harm_type': 'HATE', 'user_content': 'have a nice day'}" | rgai-tools shieldgemma
+echo "{'harm_type': 'HATE', 'user_content': 'have a nice day'}" | rgai-tools shieldgemma evaluate
 ```
 
 NOTE: Your kaggle credentials need to be [properly set][kaggle-setup] first.
