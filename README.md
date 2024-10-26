@@ -104,7 +104,7 @@ improve prompts based on user or auto-generated feedback. To start the process,
 run:
 
 ```bash
-rgai-tools model-aligner
+rgai-tools model-aligner align-prompt
 ```
 
 NOTE: You will need to set a `GEMINI_API` environment variable with your API
